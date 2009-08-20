@@ -1,3 +1,0 @@
-== 0.0.5 / 2009-08-19
-
-* Fixed the README.txt.

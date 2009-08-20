@@ -1,0 +1,5 @@
+lib/turnstile/tmp/db.sdbm.dir
+lib/turnstile/tmp/db.sdbm.pag
+lib/turnstile/tmp/db.sdbm_expires.dir
+lib/turnstile/tmp/db.sdbm_expires.dir
+pkg

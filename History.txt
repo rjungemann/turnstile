@@ -1,3 +1,7 @@
 == 0.0.5 / 2009-08-19
 
 * Fixed the README.txt.
+
+== 0.0.6 / 2009-08-19
+
+* Added some specs. Fixed some serious errors.
