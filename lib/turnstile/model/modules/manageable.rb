@@ -6,15 +6,16 @@ module Turnstile
       module Manageable
         module ClassMethods
           def find name
+            raise "No name was provided." if name.nil?
+            
             $t.db.has_key?("user-#{name}") ? User.new(name) : nil
           end
 
           def create name
             raise "No name was provided." if name.nil?
+            raise "User already exists" if User.exists? name
             
             $t.transact("user-#{name}") do |user|
-              raise "User already exists" unless user.empty?
-
               { :name => name, :realms => {}, :created_on => Time.now }
             end
             
@@ -30,7 +31,7 @@ module Turnstile
           end
 
           def realms
-            $t.db["realms"].andand.keys
+            $t.db["realms"].keys
           end
         end
         
@@ -70,6 +71,9 @@ module Turnstile
         end
 
         def in_realm? realm
+          raise "No realm was provided." if realm.nil?
+          raise "Realm doesn't exist." if Realm.find(realm).nil?
+          
           !$t.db["user-#{@name}"][:realms][realm].nil?
         end
 

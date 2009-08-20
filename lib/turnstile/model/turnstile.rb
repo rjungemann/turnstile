@@ -13,7 +13,7 @@ module Turnstile
       end
     
       def initialize(options = {})
-        tmp_dir = File.join(File.dirname(__FILE__), "..", "tmp")
+        tmp_dir = File.join(File.dirname(__FILE__), %w[.. .. .. tmp])
         Dir.mkdir(tmp_dir) unless File.directory?(tmp_dir)
         
         options[:path] ||= File.join(tmp_dir, "db.sdbm")

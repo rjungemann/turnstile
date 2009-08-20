@@ -12,8 +12,11 @@ module Turnstile
       end
       
       def self.create name, *roles
+        raise "Name for realm wasn't provided." if name.nil?
+        raise "Realm already exists." if Realm.exists? "name"
+        
         $t.transact("realms") do |realms|
-          realms[name] ||= { :roles => roles || [] }
+          realms[name] = { :roles => roles || [] }
           
           realms
         end
@@ -61,6 +64,8 @@ module Turnstile
           
           realms
         end
+        
+        @name = nil
         
         nil
       end

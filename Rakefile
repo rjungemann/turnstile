@@ -13,6 +13,13 @@ rescue LoadError
   end
 end
 
+namespace :tmp do
+  desc "Remove all temporary files."
+  task :clean do
+    sh "sudo rm -rf pkg tmp"
+  end
+end
+
 ensure_in_path 'lib'
 require 'turnstile'
 

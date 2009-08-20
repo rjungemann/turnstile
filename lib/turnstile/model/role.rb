@@ -12,6 +12,8 @@ module Turnstile
       end
 
       def self.create name, *rights
+        raise "Name wasn't provided." if name.nil?
+        
         rights ||= []
         roles = $t.db["roles"]
 
@@ -25,6 +27,8 @@ module Turnstile
       end
 
       def self.find name
+        raise "Name wasn't provided." if name.nil?
+        
         roles = $t.db["roles"]
 
         roles.include?(name) ? Role.new(name) : nil
@@ -45,10 +49,15 @@ module Turnstile
       end
       
       def has_right? right
+        raise "Right wasn't provided." if right.nil?
+        
         rights.include? right
       end
 
       def add_right right
+        raise "Right wasn't provided." if right.nil?
+        raise "Right already exists." if Role.has_right? right
+        
         roles = $t.db["roles"]
 
         rights = roles[@name][:rights] + right
@@ -60,6 +69,9 @@ module Turnstile
       end
 
       def remove_right right
+        raise "Right wasn't provided." if right.nil?
+        raise "Right doesn't exist." unless Role.has_right? right
+        
         roles = $t.db["roles"]
 
         rights = roles[@name][:rights].reject right
