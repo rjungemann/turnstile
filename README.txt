@@ -10,7 +10,6 @@ Turnstile is built on Moneta, which is a hot-swappable interface for various key
 
 == FEATURES/PROBLEMS:
 
-* Tests are glaringly missing.
 * I need to add in my set of Rack middleware for creating providers, consumers, and clients. I have a mostly completed set of code for these.
 * I am considering OAuth and/or OpenID support for my provider, consumer, and client, which could be useful for different aspects of turnstile.
 
@@ -76,7 +75,7 @@ To use, either type `turnstile` into your terminal, or create a new text file, t
 
 (The MIT License)
 
-Copyright (c) 2008 FIXME (different license?)
+Copyright (c) 2009 thefifthcircuit.
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

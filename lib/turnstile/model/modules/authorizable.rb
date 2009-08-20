@@ -3,6 +3,12 @@ module Turnstile
     module Modules
       module Authorizable
         def authorized? realm, role
+          raise "Realm wasn't provided." if realm.nil?
+          raise "Role wasn't provided." if role.nil?
+          raise "Role doesn't exist." unless Role.exists? role
+          raise "Realm doesn't exist." unless Realm.exists? realm
+          raise "User isn't part of realm." unless in_realm?(realm)
+          
           columns = $t.db["user-#{@name}"]
 
           raise "User isn't part of realm." if columns[:realms][realm].nil?
@@ -11,7 +17,10 @@ module Turnstile
         end
 
         def add_role realm, role
-          raise "Role doesn't exist." if Role.find(role).nil?
+          raise "Realm wasn't provided." if realm.nil?
+          raise "Role wasn't provided." if role.nil?
+          raise "Role doesn't exist." unless Role.exists? role
+          raise "Realm doesn't exist." unless Realm.exists? realm
           raise "User isn't part of realm." unless in_realm?(realm)
           
           columns = $t.db["user-#{@name}"]
@@ -27,7 +36,10 @@ module Turnstile
         end
 
         def remove_role realm, role
-          raise "Role doesn't exist." if Role.find(role).nil?
+          raise "Realm wasn't provided." if realm.nil?
+          raise "Role wasn't provided." if role.nil?
+          raise "Role doesn't exist." unless Role.exists? role
+          raise "Realm doesn't exist." unless Realm.exists? realm
           raise "User isn't part of realm." unless in_realm?(realm)
           
           columns = $t.db["user-#{@name}"]
@@ -43,6 +55,9 @@ module Turnstile
         end
 
         def roles realm
+          raise "Realm wasn't provided." if realm.nil?
+          raise "Realm doesn't exist." unless Realm.exists? realm
+          
           columns = $t.db["user-#{@name}"]
 
           raise "User isn't part of realm" unless in_realm?(realm)
@@ -51,6 +66,11 @@ module Turnstile
         end
         
         def has_right? realm, right
+          raise "Realm wasn't provided." if realm.nil?
+          raise "Right wasn't provided." if right.nil?
+          raise "Realm doesn't exist." unless Realm.exists? realm
+          raise "User isn't part of realm." unless in_realm?(realm)
+          
           not roles(realm).reject { |role|
             not Role.find(role).has_right? role
           }.empty?

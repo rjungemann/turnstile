@@ -14,7 +14,7 @@ module Turnstile
     
       def initialize(options = {})
         tmp_dir = File.join(File.dirname(__FILE__), "..", "tmp")
-        Dir.mkdirs(tmp_dir) unless File.directory?(tmp_dir)
+        Dir.mkdir(tmp_dir) unless File.directory?(tmp_dir)
         
         options[:path] ||= File.join(tmp_dir, "db.sdbm")
         options[:moneta_store] ||= Moneta::SDBM
