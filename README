@@ -6,7 +6,7 @@ turnstile
 
 Turnstile is meant to be a flexible authentication and authorization system for Ruby. Currently it is merely a set of "model" classes, although I will shortly release a set of Rack middleware and an HTTP client library which will allow one to create providers, consumers, and clients which are available to Rails apps (or any Rack-compatible app for that matter), for a modest "single sign-on" solution.
 
-Turnstile is built on Moneta, which is a hot-swappable interface for various key-value stores. Moneta uses SDBM as its data-store by default, but it can also use 
+Turnstile is built on Moneta, which is a hot-swappable interface for various key-value stores. Moneta uses SDBM as its data-store by default, but it can also use Tokyo Cabinet, Redis, or even SQL-based sources, thanks to the DataMapper Moneta wrapper.
 
 == FEATURES/PROBLEMS:
 
